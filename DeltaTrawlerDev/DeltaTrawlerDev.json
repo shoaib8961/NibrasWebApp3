@@ -1,0 +1,43 @@
+{
+  "name" : "DeltaTrawlerDev",
+  "description" : "",
+  "role" : "arn:aws:iam::861165870019:role/ned-udp-cms-cross-account-role",
+  "executionProperty" : {
+    "maxConcurrentRuns" : 10
+  },
+  "command" : {
+    "name" : "glueetl",
+    "scriptLocation" : "s3://aws-glue-assets-861165870019-us-west-2/scripts/DeltaTrawlerDev.py",
+    "pythonVersion" : "3"
+  },
+  "defaultArguments" : {
+    "--enable-glue-datacatalog" : "true",
+    "--job-bookmark-option" : "job-bookmark-disable",
+    "--datalake-formats" : "delta",
+    "--TempDir" : "s3://aws-glue-assets-861165870019-us-west-2/temporary/",
+    "--extra-jars" : "s3://output-bucket-cms-ned-poc/jars/spark-xml_2.12-0.16.0.jar",
+    "--enable-metrics" : "true",
+    "--enable-spark-ui" : "true",
+    "--spark-event-logs-path" : "s3://aws-glue-assets-861165870019-us-west-2/sparkHistoryLogs/",
+    "--enable-job-insights" : "false",
+    "--additional-python-modules" : "openpyxl,xlrd",
+    "--enable-continuous-cloudwatch-log" : "true",
+    "--job-language" : "python",
+    "--enable-auto-scaling" : "true",
+    "--extra-files" : "s3://output-bucket-cms-ned-poc/scheduler_config/pool.xml"
+  },
+  "maxRetries" : 0,
+  "allocatedCapacity" : 16,
+  "timeout" : 60,
+  "maxCapacity" : 16.0,
+  "glueVersion" : "4.0",
+  "numberOfWorkers" : 8,
+  "workerType" : "G.2X",
+  "executionClass" : "STANDARD",
+  "sourceControlDetails" : {
+    "provider" : "GITHUB",
+    "repository" : "NibrasWebApp3",
+    "branch" : "master",
+    "folder" : "DeltaTrawlerDev"
+  }
+}
